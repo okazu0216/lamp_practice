@@ -23,7 +23,12 @@ function get_post($name){
   };
   return '';
 }
-
+function get_post_order_id(){
+  if(isset($_POST['order_id']) === true){
+    return $_POST['order_id'];
+  };
+  return '';
+}
 function get_file($name){
   if(isset($_FILES[$name]) === true){
     return $_FILES[$name];
