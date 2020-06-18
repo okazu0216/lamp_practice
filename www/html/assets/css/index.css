@@ -1,4 +1,6 @@
 .item {
   margin-top: 10px;
 }
-
+.sort_container{
+  text-align: right;
+}

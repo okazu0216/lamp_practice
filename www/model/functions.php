@@ -29,6 +29,12 @@ function get_post_order_id(){
   };
   return '';
 }
+function get_sort(){
+  if(isset($_GET['sort']) === true){
+    return $_GET['sort'];
+  };
+  return '';
+}
 function get_file($name){
   if(isset($_FILES[$name]) === true){
     return $_FILES[$name];

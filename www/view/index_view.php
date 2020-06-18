@@ -12,6 +12,16 @@
 
   <div class="container">
     <h1>商品一覧</h1>
+    <div class="sort_container">
+    <form method="get">
+      <select name="sort">
+        <option value="new" <?php if($sort === 'new') print 'selected';?>>新着順</option>
+        <option value="cheap" <?php if($sort === 'cheap') print 'selected';?>>価格の安い順</option>
+        <option value="expensive" <?php if($sort === 'expensive') print 'selected';?>>価格の高い順</option>
+      </select>
+      <input type="submit" value="並び替え">
+    </form>
+    </div>
     <?php include VIEW_PATH . 'templates/messages.php'; ?>
 
     <div class="card-deck">
