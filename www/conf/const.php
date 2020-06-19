@@ -46,7 +46,7 @@ define('PERMITTED_ITEM_STATUSES', array(
   'open' => 1,
   'close' => 0,
 ));
-
+define('ROWS_PER_PAGE', 8);
 define('PERMITTED_IMAGE_TYPES', array(
   IMAGETYPE_JPEG => 'jpg',
   IMAGETYPE_PNG => 'png',

@@ -45,7 +45,7 @@ function get_items($db, $is_open = false)
   return fetch_all_query($db, $sql);
 }
 
-function sort_items($db, $sort, $is_open = false)
+function sort_items($db, $sort, $offset, $is_open = false)
 {
   $sql = '
   SELECT
@@ -57,7 +57,10 @@ function sort_items($db, $sort, $is_open = false)
     status
   FROM
     items
+  LIMIT ?, ?
 ';
+  //$total = $dbh->query("select count(*) from items )->fetchColumn();
+  //$totalPages = $total / 8;
   if ($is_open === true) {
     $sql .= '
     WHERE status = 1
@@ -81,7 +84,20 @@ function sort_items($db, $sort, $is_open = false)
       DESC
     ';
   }
-  return fetch_all_query($db, $sql);
+  return fetch_all_query($db, $sql, [$offset, ROWS_PER_PAGE]);
+}
+
+function get_record_count($db, $is_open = false)
+{
+  $sql = '
+    select count(*) from items
+    ';
+  if ($is_open === true) {
+    $sql .= '
+  WHERE status = 1
+';
+  }
+  return $db->query($sql)->fetchColumn();
 }
 
 function get_all_items($db)
