@@ -4,3 +4,8 @@
 .sort_container{
   text-align: right;
 }
+.page_number {
+  font-size: 25px;
+  margin:15px auto;
+}
+

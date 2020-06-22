@@ -2,7 +2,6 @@
 require_once MODEL_PATH . 'functions.php';
 require_once MODEL_PATH . 'db.php';
 
-// DB利用
 
 function get_item($db, $item_id)
 {
@@ -57,10 +56,8 @@ function sort_items($db, $sort, $offset, $is_open = false)
     status
   FROM
     items
-  LIMIT ?, ?
 ';
-  //$total = $dbh->query("select count(*) from items )->fetchColumn();
-  //$totalPages = $total / 8;
+  
   if ($is_open === true) {
     $sql .= '
     WHERE status = 1
@@ -84,6 +81,10 @@ function sort_items($db, $sort, $offset, $is_open = false)
       DESC
     ';
   }
+
+  $sql .= '
+  LIMIT ?, ?
+  ';
   return fetch_all_query($db, $sql, [$offset, ROWS_PER_PAGE]);
 }
 
@@ -94,12 +95,17 @@ function get_record_count($db, $is_open = false)
     ';
   if ($is_open === true) {
     $sql .= '
-  WHERE status = 1
-';
+      WHERE status = 1
+    ';
   }
   return $db->query($sql)->fetchColumn();
 }
 
+function get_record_count_pages($db)
+{
+  $totalPages = ceil(get_record_count($db, true) / ROWS_PER_PAGE);
+  return $totalPages;
+}
 function get_all_items($db)
 {
   return get_items($db);
@@ -209,7 +215,6 @@ function delete_item($db, $item_id)
 }
 
 
-// 非DB
 
 function is_open($item)
 {
