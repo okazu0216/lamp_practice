@@ -163,7 +163,6 @@ function purchase_carts($db, $carts)
 
   delete_user_carts($db, $carts[0]['user_id']);
 
-  //エラーがある場合、ロールバック、なければコミット
   if(has_error()){
     $db->rollback();
   }else{
